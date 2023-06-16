@@ -5,7 +5,7 @@ CC=gcc
 CCFLAGS=-Wall -Wextra -pedantic
 
 # Libraries to use
-LIBS=
+LIBS=-lcurses
 
 # Where to store the executable
 BINDIR=bin
@@ -24,6 +24,14 @@ OBJDIR=obj
 
 SRCFILES=$(patsubst %,${SRCDIR}/%,main.c)
 OBJFILES=$(patsubst ${SRCDIR}%.c,${OBJDIR}%.o,${SRCFILES})
+
+all: ${BINDIR}/${BIN}
+
+run: ${BINDIR}/${BIN}
+	${BINDIR}/${BIN}
+
+fresh: clean run
+
 
 # Make the executable, linking the compiled files together with the libraries
 ${BINDIR}/${BIN}: ${OBJFILES} ${BINDIR}
